@@ -71,18 +71,6 @@ model User {
   prescriptions     Prescription[] @relation("PrescribedBy")
   radiologyReports  RadiologyReport[] @relation("RadiologistReports")
   orders            Order[]          @relation(fields: [], references: [])
-  admin             Admin?
-  superadmin        Superadmin?
-}
-
-model Admin {
-  id     String @id
-  user   User   @relation(fields: [id], references: [id])
-}
-
-model Superadmin {
-  id     String @id
-  user   User   @relation(fields: [id], references: [id])
 }
 
 model MedicalRecord {
