@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-// Create a new admin
-export const createAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+// Create a new admin (superadmin only)
+export const createSystemAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { email, password, firstName, lastName, phoneNumber } = req.body;
 
@@ -47,7 +47,7 @@ export const createAdmin: RequestHandler = async (req: Request, res: Response, n
     });
 
     res.status(201).json({
-      message: 'Admin created successfully',
+      message: 'System admin created successfully',
       admin: {
         id: admin.id,
         email: admin.email,
@@ -60,8 +60,8 @@ export const createAdmin: RequestHandler = async (req: Request, res: Response, n
   }
 };
 
-// Get all admins
-export const getAllAdmins: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+// Get all system admins
+export const getAllSystemAdmins: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const admins = await prisma.user.findMany({
       where: {
@@ -78,8 +78,8 @@ export const getAllAdmins: RequestHandler = async (req: Request, res: Response, 
   }
 };
 
-// Update admin
-export const updateAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+// Update system admin
+export const updateSystemAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params;
     const { email, firstName, lastName, phoneNumber } = req.body;
@@ -102,7 +102,7 @@ export const updateAdmin: RequestHandler = async (req: Request, res: Response, n
     });
 
     res.status(200).json({
-      message: 'Admin updated successfully',
+      message: 'System admin updated successfully',
       admin
     });
   } catch (error) {
@@ -110,8 +110,8 @@ export const updateAdmin: RequestHandler = async (req: Request, res: Response, n
   }
 };
 
-// Delete admin
-export const deleteAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+// Delete system admin
+export const deleteSystemAdmin: RequestHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.params;
 
@@ -119,7 +119,7 @@ export const deleteAdmin: RequestHandler = async (req: Request, res: Response, n
       where: { id }
     });
 
-    res.status(200).json({ message: 'Admin deleted successfully' });
+    res.status(200).json({ message: 'System admin deleted successfully' });
   } catch (error) {
     next(error);
   }

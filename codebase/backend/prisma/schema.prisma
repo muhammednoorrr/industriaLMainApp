@@ -116,6 +116,7 @@ model RadiologyReport {
   radiologist     User?          @relation("RadiologistReports", fields: [radiologistId], references: [id])
   radiologistId   String?
   notes           String?
+  imagePath       String?        // Path to the stored image
 }
 
 model Order {

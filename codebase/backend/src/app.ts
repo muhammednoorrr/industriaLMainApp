@@ -11,6 +11,8 @@ import labResultRouter from "./routes/labResult.route"; // Updated to use lab re
 import receptionRoutes from "./routes/rescptions.route";  
 import doctorRoutes from "./routes/doctor.route";    
 import superadminRoutes from "./routes/superadmin.route";
+import radiologyRoutes from './routes/radiology.route';
+
 
 const app = express();
 
@@ -26,6 +28,7 @@ app.use("/api/lab-results", labResultRouter);
 app.use('/api/reception', receptionRoutes);  
 app.use('/api/doctor', doctorRoutes);  
 app.use('/api/superadmin', superadminRoutes);
+app.use('/api/radiology', radiologyRoutes);
 
 // Swagger API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
